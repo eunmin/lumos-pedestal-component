@@ -17,7 +17,6 @@ Require the library, and the Component library:
 
 ```clojure
 (require '[lumos.component.pedestal :refer [pedestal-server]]
-  '[io.pedestal.http :as pedestal]
   '[io.pedestal.http.route.definition :refer [defroutes]]
   '[com.stuartsierra.component :as component])
 ```
@@ -25,16 +24,20 @@ Require the library, and the Component library:
 Then create a server component:
 
 ```clojure
-(defn handler [request]
-  {:status 200
-   :headers {"Content-Type" "text/plain"}
-   :body "Hello World"})
+(defn hello-world-handler
+  [request]
+  {:status 200 :headers {} :body "Hello World"})
 
 (defroutes routes
-  [[["/" {:get handler}]]])
+  [[["/" {:get hello-world-handler}]]])
 
-(def http-server
-  (pedestal-server {:type :jetty :port 8080 :routes routes}))
+(def system (component/system-map
+             :http-server (pedestal-server {:type :immutant
+                                            :port 8080
+                                            :routes routes})))
+
+(defn -main [& args]
+  (component/start system))
 ```
 
 ## License
