@@ -1,4 +1,4 @@
-(defproject lumos-pedestal-component "0.1.0-SNAPSHOT"
+(defproject lumos-pedestal-component "0.1.0"
   :description "A component for pedestal"
   :url "https://github.com/eunmin/lumos-pedestal-component"
   :license {:name "The MIT License"
