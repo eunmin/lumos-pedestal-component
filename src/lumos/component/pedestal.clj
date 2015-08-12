@@ -2,18 +2,18 @@
   (:require [com.stuartsierra.component :as component]
             [io.pedestal.http :as pedestal]))
 
-(defrecord PedestalServer [routes]
+(defrecord PedestalServer [router]
   component/Lifecycle
   (start [component]
     (if (:server component)
       component
-      (let [options (assoc component :join? false)
+      (let [options (assoc (dissoc component :router) :join? false)
             server (-> options
-                       (assoc :routes routes)
-                       (#(into {} (for [[k v] %]
-                                     [(keyword "io.pedestal.http" (name k)) v])))
-                       pedestal/create-server
-                       pedestal/start)]
+                     (assoc :routes (:routes router))
+                     (#(into {} (for [[k v] %]
+                                  [(keyword "io.pedestal.http" (name k)) v])))
+                     pedestal/create-server
+                     pedestal/start)]
         (assoc component :server server))))
   (stop [component]
     (if-let [server (:server component)]

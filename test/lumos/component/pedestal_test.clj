@@ -32,13 +32,13 @@
 (deftest test-pedestal-jetty-server-test
   (let [server (pedestal-server {:type :jetty
                                  :port 8090
-                                 :routes routes})]
+                                 :router {:routes routes}})]
     (start-server-test server)
     (stop-server-test server)))
 
 (deftest test-pedestal-immutant-server-test
   (let [server (pedestal-server {:type :immutant
                                  :port 8090
-                                 :routes routes})]
+                                 :router {:routes routes}})]
     (start-server-test server)
     (stop-server-test server)))
