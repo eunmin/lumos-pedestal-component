@@ -14,7 +14,7 @@
 (def system (component/system-map
              :http-server (pedestal-server {:type :immutant
                                             :port 8080
-                                            :routes routes})))
+                                            :routes {:routes routes}})))
 
 (defn -main [& args]
   (component/start system))
