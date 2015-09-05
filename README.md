@@ -9,7 +9,7 @@ A [component][1] for the [Pedestal][2].
 
 Add the following dependency to your `project.clj`:
 
-    [lumos-pedestal-component "0.1.0"]
+    [lumos-pedestal-component "0.1.1"]
 
 ## Usage
 
